@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<title>index</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="section">
+			<h1>前端30分钟入门</h1>
+
+			<p>前端30分钟入门，是一个系列教程，主要面向零基础的前端开发者，希望通过这个系列教程，能够帮助你快速入门前端开发。</p>
+
+			<p>这是一个简单的博客系统，使用一些简单的技术，如html、css、javascript、jQuery等等，来实现一个简单的博客系统，并能实现基本的文章发布、编辑、删除、分类、评论等功能。</p>
+			<p>如果你对前端开发感兴趣，并且有一定的编程基础，那么这个系列教程应该能给你提供帮助。</p>
+			<div>
+				<button id="countButton">点击我</button>
+				<p>点击次数：<span id="count">0</span></p>
+			</div>
+
+			<div>
+				<button id="getFansButton">获取粉丝数量</button>
+				<p id="fansCount">粉丝数：<span id="fanNumber">N/A</span></p>
+			</div>
+
+			<!-- <div>
+				<img src="https://pic.qqans.com/up/2024-6/17183257338657301.jpg" alt="示例图片">
+			</div> -->
+		</div>
+
+		<div class="section">
+			<h2>这是一个小标题</h2>
+			<p>点击<a href="https://github.com/dongchao980612/web_in_30_min">这里</a>查看教程的源代码。</p>
+		</div>
+	</div>
+
+	<script>
+		// 点击按钮计数
+		let count = 0;
+		document.getElementById("countButton").addEventListener("click", function () {
+			count++;
+			document.getElementById("count").textContent = count;
+		});
+
+
+
+		// 访问countapi获取粉丝数
+		document.getElementById("getFansButton").addEventListener("click", function () {
+			// 发送请求获取粉丝数 
+			// 注意跨域请求
+			fetch("http://localhost:5000/getFans")
+				.then(response => response.json())
+				.then(data => {
+					console.log(data);
+					document.getElementById("fanNumber").textContent = data.data.follower;
+				})
+				.catch(error => {
+					console.error("fetch error：", error);
+					document.getElementById("fanNumber").textContent = "获取失败";
+				});
+		});
+	</script>
+</body>
+
+</html>
