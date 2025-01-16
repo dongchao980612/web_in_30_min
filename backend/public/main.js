@@ -1,10 +1,9 @@
-// scripts/main.js
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // 获取所有 todos 并显示在页面上
     async function fetchTodos() {
         const response = await fetch('/todos');
         const data = await response.json();
-        displayTodos(data);
+        displayTodos(data.todos); // 确保传递的是 todos 数组
     }
 
     // 显示 todos 为表格
@@ -14,14 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         todos.forEach(todo => {
             const tr = document.createElement('tr');
-            const idCell = document.createElement('td');
             const titleCell = document.createElement('td');
             const statusCell = document.createElement('td');
             const actionsCell = document.createElement('td');
 
-            idCell.textContent = todo.id;
             titleCell.textContent = todo.title;
-           
 
             // 添加状态下拉框
             const statusSelect = document.createElement('select');
@@ -92,8 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             actionsCell.appendChild(deleteButton);
 
-
-            tr.appendChild(idCell);
             tr.appendChild(titleCell);
             tr.appendChild(statusCell);
             tr.appendChild(actionsCell);
